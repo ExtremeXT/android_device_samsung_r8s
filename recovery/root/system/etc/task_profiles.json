@@ -76,26 +76,6 @@
       "Name": "FreezerState",
       "Controller": "freezer",
       "File": "cgroup.freeze"
-    },
-    {
-      "Name": "SFreezerState",
-      "Controller": "sfreezer",
-      "File": "frozen/freezer.state"
-    },
-    {
-      "Name": "GpisSfCpuset",
-      "Controller": "cpuset",
-      "File": "cpus"
-    },
-    {
-      "Name": "OlafState",
-      "Controller": "sfreezer",
-      "File": "olaf/freezer.state"
-    },
-    {
-      "Name": "SlowdownState",
-      "Controller": "sfreezer",
-      "File": "abnormal/freezer.state"
     }
   ],
 
@@ -135,45 +115,6 @@
           {
             "Name": "FreezerState",
             "Value": "0"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "SFrozen",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "sfreezer",
-            "Path": "frozen"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "SUnfrozen",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "sfreezer",
-            "Path": ""
-          }
-        }
-      ]
-    },
-    {
-      "Name": "Slowdown",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "sfreezer",
-            "Path": "abnormal"
           }
         }
       ]
@@ -428,19 +369,6 @@
       ]
     },
     {
-      "Name": "ProcessCapacityModerate",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpuset",
-            "Path": "moderate"
-          }
-        }
-      ]
-    },
-    {
       "Name": "ProcessCapacityHigh",
       "Actions": [
         {
@@ -493,19 +421,7 @@
         }
       ]
     },
-    {
-      "Name": "ProcessCapacityAbnormal",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpuset",
-            "Path": "abnormal"
-          }
-        }
-      ]
-    },
+
     {
       "Name": "CameraServiceCapacity",
       "Actions": [
@@ -579,7 +495,7 @@
           "Name": "SetTimerSlack",
           "Params":
           {
-            "Slack": "50000"
+            "Slack": "40000000"
           }
         }
       ]
@@ -610,6 +526,20 @@
         }
       ]
     },
+    {
+      "Name": "SFRenderEnginePolicy",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpuset",
+            "Path": "system-background"
+          }
+        }
+      ]
+    },
+
     {
       "Name": "PerfBoost",
       "Actions": [
@@ -692,149 +622,6 @@
           }
         }
       ]
-    },
-    {
-      "Name": "GpisSfCpusetJoin",
-      "Actions" : [
-        {
-          "Name" : "JoinCgroup",
-          "Params" :
-          {
-            "Controller": "cpuset",
-            "Path": "sf"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "GpisSfCpusetEnable",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "GpisSfCpuset",
-            "Value": "4-7"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "GpisSfCpusetDisable",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "GpisSfCpuset",
-            "Value": "0-7"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "JoinOlaf",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "sfreezer",
-            "Path": "olaf"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "JoinInteractiveDexopt",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpuset",
-            "Path": "dexopt"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "DoSomethingOlaf",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "OlafState",
-            "Value": "FROZEN"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "DoNothingOlaf",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "OlafState",
-            "Value": "THAWED"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "SlowdownThawed",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "SlowdownState",
-            "Value": "THAWED"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "SlowdownFrozen",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "SlowdownState",
-            "Value": "FROZEN"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "TopAppUsage",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpuacct",
-            "Path": "top-app"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "BackgroundUsage",
-      "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpuacct",
-            "Path": "."
-          }
-        }
-      ]
     }
   ],
 
@@ -860,7 +647,7 @@
       "Profiles": [ "ServicePerformance", "LowIoPriority", "TimerSlackNormal" ]
     },
     {
-      "Name": "VMCompilationPerformance",
+      "Name": "SCHED_SP_COMPUTE",
       "Profiles": [ "HighPerformance", "ProcessCapacityHigh", "LowIoPriority", "TimerSlackNormal" ]
     },
     {
@@ -869,44 +656,39 @@
     },
     {
       "Name": "CPUSET_SP_DEFAULT",
-      "Profiles": [ "TimerSlackNormal", "BackgroundUsage" ]
+      "Profiles": [ "TimerSlackNormal" ]
     },
     {
       "Name": "CPUSET_SP_BACKGROUND",
-      "Profiles": [ "HighEnergySaving", "ProcessCapacityLow", "LowIoPriority", "TimerSlackHigh", "BackgroundUsage" ]
+      "Profiles": [ "HighEnergySaving", "ProcessCapacityLow", "LowIoPriority", "TimerSlackHigh" ]
     },
     {
       "Name": "CPUSET_SP_FOREGROUND",
-      "Profiles": [ "HighPerformance", "ProcessCapacityHigh", "HighIoPriority", "TimerSlackNormal", "BackgroundUsage" ]
+      "Profiles": [ "HighPerformance", "ProcessCapacityHigh", "HighIoPriority", "TimerSlackNormal" ]
     },
     {
       "Name": "CPUSET_SP_TOP_APP",
-      "Profiles": [ "MaxPerformance", "ProcessCapacityMax", "MaxIoPriority", "TimerSlackNormal", "TopAppUsage" ]
+      "Profiles": [ "MaxPerformance", "ProcessCapacityMax", "MaxIoPriority", "TimerSlackNormal" ]
     },
     {
       "Name": "CPUSET_SP_SYSTEM",
-      "Profiles": [ "ServiceCapacityLow", "TimerSlackNormal", "BackgroundUsage" ]
+      "Profiles": [ "ServiceCapacityLow", "TimerSlackNormal" ]
     },
     {
       "Name": "CPUSET_SP_RESTRICTED",
-      "Profiles": [ "ServiceCapacityRestricted", "TimerSlackNormal", "BackgroundUsage" ]
+      "Profiles": [ "ServiceCapacityRestricted", "TimerSlackNormal" ]
     },
     {
       "Name": "Dex2OatBootComplete",
       "Profiles": [ "Dex2oatPerformance", "LowIoPriority", "TimerSlackHigh" ]
     },
     {
+      "Name": "Dex2OatBackground",
+      "Profiles": [ "Dex2OatBootComplete" ]
+    },
+    {
       "Name": "OtaProfiles",
       "Profiles": [ "ServiceCapacityLow", "LowIoPriority", "HighEnergySaving" ]
-    },
-    {
-      "Name": "GPIS_HINT_ENABLE",
-      "Profiles": [ "GpisSfCpusetEnable" ]
-    },
-    {
-      "Name": "GPIS_HINT_DISABLE",
-      "Profiles": [ "GpisSfCpusetDisable" ]
     }
   ]
 }
-

@@ -178,10 +178,6 @@
 # audio
 /dev/seiren               0660   system     audio
 
-# Mobicore
-/dev/mobicore             0600   drmrpc     drmrpc
-/dev/mobicore-user        0666   drm        drmrpc
-
 # SSP
 /dev/ssp             	  0660   system     system
 
